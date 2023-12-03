@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Metode de rezolvare a problemelor</title>
+    <style>
+        /* Stiluri CSS pentru aspect */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            border: 3px solid #000; /* Bordură mai evidentă pentru tabel */
+        }
+        th, td {
+            border: 2px solid #000; /* Margini evidențiate pentru toate celulele */
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #add8e6; /* Culoare azurie pastelată pentru antete */
+        }
+        td {
+            background-color: #f2f2f2; /* Fundal gri pentru celulele cu conținut */
+        }
+        td:first-child {
+            background-color: #e6e6fa; /* Culoare lila pastelată pentru prima coloană */
+        }
+        tr:nth-child(2) td {
+            background-color: #d8bfd8; /* Culoare lila pastelată pentru al doilea rând */
+        }
+        tr:nth-child(3) td {
+            background-color: #f4c2c2; /* Culoare roz pudrat pentru al treilea rând */
+        }
+        tr:nth-child(4) td {
+            background-color: #eed890; /* Culoare verde briliant pastelat pentru al patrulea rând */
+        }
+    </style>
+    
+</head>
+<body> 
+    <h1>Metode de rezolvare a problemelor</h1>
+
+    <div class="metoda">
+        <h2>Recursia</h2>
+        <p>
+            Recursia este o tehnică în programare în care o funcție se apelează pe sine pentru a rezolva o problemă mai mică, până când se atinge o condiție de oprire.
+            Această abordare poate fi utilă pentru rezolvarea problemelor care pot fi împărțite în subprobleme mai mici și identice cu problema inițială. Aici se oferă 3 exemple de probleme, incluzând cerința și rezolvarea în C++:
+        </p>
+        <table>
+            <tr>
+                <th>Cerinta</th>
+                <th>Rezolvare (C++)</th>
+            </tr>
+            <tr>
+                <td>Calculul factorialului</td>
+                <td> 
+                            <code>
+                                #include &lt;iostream&gt;<br>
+                                <br>
+                                unsigned long long factorial(unsigned int n) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return (n == 0 || n == 1) ? 1 : n * factorial(n - 1);<br>
+                                }<br>
+                                <br>
+                                int main() {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;unsigned int numar;<br>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Introduceti un numar pentru a calcula factorialul: ";<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;std::cin &gt;&gt; numar;<br>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;unsigned long long rezultat = factorial(numar);<br>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Factorialul lui " &lt;&lt; numar &lt;&lt; " este: " &lt;&lt; rezultat &lt;&lt; std::endl;<br>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                                }
+                            </code>
+                        </td>
+                    </tr>
+            <tr>
+                <td>Sirul lui Fibonacci</td>
+                <td>
+                            <code>
+                                #include &lt;iostream&gt;<br>
+                                <br>
+                                unsigned int fibonacci(unsigned int n) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;if (n &lt;= 1) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return n;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return fibonacci(n - 1) + fibonacci(n - 2);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                                <br>
+                                int main() {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;unsigned int limit = 10; // Numărul de termeni din șirul Fibonacci<br>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Primele " &lt;&lt; limit &lt;&lt; " numere din șirul Fibonacci sunt:\\n";<br>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;for (unsigned int i = 0; i &lt; limit; ++i) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; fibonacci(i) &lt;&lt; " ";<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                                }
+                            </code>
+                        </td>
+                    </tr>
+            <tr>
+                <td>Traversarea arborelui binar</td>
+                <td> <code>
+                    #include &lt;iostream&gt;<br>
+                    <br>
+                    // Structura pentru nodurile arborelui binar<br>
+                    struct Node {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int data;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Node* left;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Node* right;<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Node(int value) : data(value), left(nullptr), right(nullptr) {}<br>
+                    };<br>
+                    <br>
+                    // Funcție pentru traversarea în preordine a arborelui binar<br>
+                    void preOrderTraversal(Node* root) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;if (root == nullptr) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; root-&gt;data &lt;&lt; " ";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;preOrderTraversal(root-&gt;left);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;preOrderTraversal(root-&gt;right);<br>
+                    }<br>
+                    <br>
+                    int main() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Node* root = new Node(1);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;root-&gt;left = new Node(2);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;root-&gt;right = new Node(3);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;root-&gt;left-&gt;left = new Node(4);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;root-&gt;left-&gt;right = new Node(5);<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Traversare preordine a arborelui binar: ";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;preOrderTraversal(root);<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                    }
+                </code>
+            </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Tabel pentru metoda de Triere -->
+    <div class="metoda">
+        <h2>Trierea</h2>
+        <p>
+            Trierea este un algoritm utilizat pentru a aranja elementele într-o ordine specifică, cum ar fi ordinea crescătoare sau descrescătoare.
+            Un exemplu comun de algoritm de sortare este "Sortarea prin metoda bulelor" sau "QuickSort". Aici se oferă 3 exemple de probleme, incluzând cerința și rezolvarea în C++:
+        </p>
+        </p>
+        <table>
+            <tr>
+                <th>Cerinta</th>
+                <th>Rezolvare (C++)</th>
+            </tr>
+            <tr>
+                <td>Sortarea prin metoda bulelor</td>
+                <td> <code>
+                    #include &lt;iostream&gt;<br>
+                    <br>
+                    void bubbleSort(int arr[], int n) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; n - 1; ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int j = 0; j &lt; n - i - 1; ++j) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (arr[j] &gt; arr[j + 1]) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int temp = arr[j];<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[j] = arr[j + 1];<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[j + 1] = temp;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    }<br>
+                    <br>
+                    int main() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int arr[] = {64, 25, 12, 22, 11};<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int n = sizeof(arr) / sizeof(arr[0]);<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Vectorul initial este: ";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; n; ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; arr[i] &lt;&lt; " ";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;bubbleSort(arr, n);<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "\nVectorul sortat prin metoda bulelor este: ";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; n; ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; arr[i] &lt;&lt; " ";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                    }
+                </code>
+            </td>
+            </tr>
+            <tr>
+                <td>QuickSort</td>
+                <td>
+                            <code>
+                                #include &lt;iostream&gt;<br>
+                                <br>
+                                void swap(int& a, int& b) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;int temp = a;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;a = b;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;b = temp;<br>
+                                }<br>
+                                <br>
+                                int partition(int arr[], int low, int high) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;int pivot = arr[high];<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;int i = (low - 1);<br>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;for (int j = low; j &lt;= high - 1; ++j) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (arr[j] &lt; pivot) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++i;<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swap(arr[i], arr[j]);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;swap(arr[i + 1], arr[high]);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return (i + 1);<br>
+                                }<br>
+                                <br>
+                                void quickSort(int arr[], int low, int high) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;if (low &lt; high) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int pi = partition(arr, low, high);<br>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quickSort(arr, low, pi - 1);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quickSort(arr, pi + 1, high);<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                                <br>
+                                int main() {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;int arr[] = {64, 25, 12, 22, 11};<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;int n = sizeof(arr) / sizeof(arr[0]);<br>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Vectorul initial este: ";<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; n; ++i) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; arr[i] &lt;&lt; " ";<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;quickSort(arr, 0, n - 1);<br>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "\nVectorul sortat prin QuickSort este: ";<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; n; ++i) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; arr[i] &lt;&lt; " ";<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                                }
+                            </code>
+                </td>
+            </tr>
+            <tr>
+                <td>MergeSort</td>
+                <td><code>
+                    #include &lt;iostream&gt;<br>
+                    <br>
+                    void merge(int arr[], int left, int middle, int right) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int n1 = middle - left + 1;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int n2 = right - middle;<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int* leftArr = new int[n1];<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int* rightArr = new int[n2];<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; n1; ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;leftArr[i] = arr[left + i];<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int j = 0; j &lt; n2; ++j) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rightArr[j] = arr[middle + 1 + j];<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int i = 0;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int j = 0;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int k = left;<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;while (i &lt; n1 && j &lt; n2) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (leftArr[i] &lt;= rightArr[j]) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[k] = leftArr[i];<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++i;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[k] = rightArr[j];<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++j;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++k;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;while (i &lt; n1) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[k] = leftArr[i];<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++i;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++k;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;while (j &lt; n2) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr[k] = rightArr[j];<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++j;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++k;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;delete[] leftArr;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;delete[] rightArr;<br>
+                    }<br>
+                    <br>
+                    void mergeSort(int arr[], int left, int right) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;if (left &lt; right) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int middle = left + (right - left) / 2;<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mergeSort(arr, left, middle);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mergeSort(arr, middle + 1, right);<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;merge(arr, left, middle, right);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    }<br>
+                    <br>
+                    int main() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int arr[] = {64, 25, 12, 22, 11};<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int n = sizeof(arr) / sizeof(arr[0]);<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Vectorul initial este: ";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; n; ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; arr[i] &lt;&lt; " ";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;mergeSort(arr, 0, n - 1);<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "\nVectorul sortat prin MergeSort este: ";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; n; ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; arr[i] &lt;&lt; " ";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                    }
+    
+    
+    
+    
+    </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Tabel pentru metoda Greedy -->
+    <div class="metoda">
+        <h2>Greedy</h2>
+        <p>
+            Metoda Greedy este o tehnică algoritmică care rezolvă o problemă pas cu pas, alegând cea mai bună opțiune la fiecare pas în speranța că aceasta va duce la soluția globală optimă.
+            Deși adesea oferă soluții bune, nu este întotdeauna sigur că va oferi întotdeauna cea mai bună soluție globală. Aici se oferă 3 exemple de probleme, incluzând cerința și rezolvarea în C++:
+        </p>
+        </p>
+        <table>
+            <tr>
+                <th>Cerinta</th>
+                <th>Rezolvare (C++)</th>
+            </tr>
+            <tr>
+                <td>Algoritmul rucsacului</td>
+                <td> <code>
+                    #include &lt;iostream&gt;<br>
+                    #include &lt;algorithm&gt;<br>
+                    using namespace std;<br>
+                    <br>
+                    struct Item {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int value, weight;<br>
+                    };<br>
+                    <br>
+                    bool cmp(struct Item a, struct Item b) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;double r1 = (double)a.value / a.weight;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;double r2 = (double)b.value / b.weight;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return r1 > r2;<br>
+                    }<br>
+                    <br>
+                    double fractionalKnapsack(int W, struct Item arr[], int n) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;sort(arr, arr + n, cmp);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;double totalValue = 0.0;<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i < n; ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (arr[i].weight <= W) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;totalValue += arr[i].value;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;W -= arr[i].weight;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double fraction = (double)W / arr[i].weight;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;totalValue += arr[i].value * fraction;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return totalValue;<br>
+                    }<br>
+                    <br>
+                    int main() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int W = 50;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Item arr[] = {{60, 10}, {100, 20}, {120, 30}};<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int n = sizeof(arr) / sizeof(arr[0]);<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;cout << "Valoarea maxima ce poate fi pusa in rucsac este: " << fractionalKnapsack(W, arr, n);<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                    }
+                </code></td>
+            </tr>
+            <tr>
+                <td>Algoritmul Prim pentru arborele de acoperire minimă</td>
+                <td><code>
+                    #include &lt;iostream&gt;<br>
+                    #include &lt;vector&gt;<br>
+                    #include &lt;climits&gt;<br>
+                    using namespace std;<br>
+                    <br>
+                    const int V = 5; // Numărul de noduri<br>
+                    <br>
+                    int minKey(int key[], bool mstSet[]) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int min = INT_MAX, min_index;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int v = 0; v < V; ++v) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (mstSet[v] == false && key[v] < min) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;min = key[v];<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;min_index = v;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return min_index;<br>
+                    }<br>
+                    <br>
+                    void printMST(vector<int>& parent, vector<vector<int>>& graph) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;cout << "Muchiile arborelui de acoperire minimă:\n";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 1; i < V; ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << parent[i] << " - " << i << "    Cost: " << graph[i][parent[i]] << "\n";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    }<br>
+                    <br>
+                    void primMST(vector<vector<int>>& graph) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;vector<int> parent(V);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;vector<int> key(V, INT_MAX);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;vector<bool> mstSet(V, false);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;key[0] = 0;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;parent[0] = -1;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int count = 0; count < V - 1; ++count) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int u = minKey(key, mstSet);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mstSet[u] = true;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int v = 0; v < V; ++v) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (graph[u][v] && mstSet[v] == false && graph[u][v] < key[v]) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent[v] = u;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key[v] = graph[u][v];<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;printMST(parent, graph);<br>
+                    }<br>
+                    <br>
+                    int main() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;vector<vector<int>>> graph = {{0, 2, 0, 6, 0},<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{2, 0, 3, 8, 5},<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0, 3, 0, 0, 7},<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{6, 8, 0, 0, 9},<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0, 5, 7, 9, 0}};<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;primMST(graph);<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                    }
+                </code>
+            </td>
+            </tr>
+            <tr>
+                <td>Algoritmul Huffman pentru codificarea în lănci</td>
+                <td> <code>
+                    #include &lt;iostream&gt;<br>
+                    #include &lt;queue&gt;<br>
+                    using namespace std;<br>
+                    <br>
+                    struct Node {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;char data;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;unsigned freq;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Node *left, *right;<br>
+                    };<br>
+                    <br>
+                    struct comp {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;bool operator()(Node* l, Node* r) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return l->freq > r->freq;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    };<br>
+                    <br>
+                    Node* Huffman(vector<char>& data, vector<unsigned>& freq) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Node *left, *right, *top;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;priority_queue<Node*, vector<Node*>, comp> minHeap;<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (unsigned i = 0; i < data.size(); ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minHeap.push(new Node{data[i], freq[i], nullptr, nullptr});<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;while (minHeap.size() != 1) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left = minHeap.top();<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minHeap.pop();<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right = minHeap.top();<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minHeap.pop();<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top = new Node{'#', left->freq + right->freq, left, right};<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minHeap.push(top);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return minHeap.top();<br>
+                    }<br>
+                    <br>
+                    int main() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;vector<char> data = {'a', 'b', 'c', 'd', 'e', 'f'};<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;vector<unsigned> freq = {5, 9, 12, 13, 16, 45};<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Node* root = Huffman(data, freq);<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                    }
+                </code>
+            </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Tabel pentru metoda Backtracking -->
+    <div class="metoda">
+        <h2>Backtracking</h2>
+        <p>
+            Backtracking-ul este o tehnică recursivă utilizată pentru a rezolva problemele prin încercarea tuturor posibilităților și revenirea înapoi pentru a găsi soluția optimă.
+            Este frecvent utilizat pentru problemele combinatorii, cum ar fi puzzle-urile, jocurile și altele. Aici se oferă 3 exemple de probleme, incluzând cerința și rezolvarea în C++:
+        </p>
+        </p>
+        <table>
+            <tr>
+                <th>Cerinta</th>
+                <th>Rezolvare (C++)</th>
+            </tr>
+            <tr>
+                <td>Sudoku Solver</td>
+                <td><code>
+                    #include &lt;iostream&gt;<br>
+                    using namespace std;<br>
+                    <br>
+                    const int N = 9;<br>
+                    <br>
+                    bool isSafe(int board[N][N], int row, int col, int num) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int x = 0; x < N; ++x) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (board[row][x] == num || board[x][col] == num) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int startRow = row - row % 3, startCol = col - col % 3;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i < 3; ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int j = 0; j < 3; ++j) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (board[i + startRow][j + startCol] == num) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return true;<br>
+                    }<br>
+                    <br>
+                    bool findUnassignedLocation(int board[N][N], int& row, int& col) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (row = 0; row < N; ++row) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (col = 0; col < N; ++col) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (board[row][col] == 0) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+                    }<br>
+                    <br>
+                    bool solveSudoku(int board[N][N]) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int row, col;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;if (!findUnassignedLocation(board, row, col)) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int num = 1; num <= 9; ++num) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (isSafe(board, row, col, num)) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;board[row][col] = num;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (solveSudoku(board)) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;board[row][col] = 0;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+                    }<br>
+                    <br>
+                    int main() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int board[N][N] = {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{5, 3, 0, 0, 7, 0, 0, 0, 0},<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{6, 0, 0, 1, 9, 5, 0, 0, 0},<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0, 9, 8, 0, 0, 0, 0, 6, 0},<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{8, 0, 0, 0, 6, 0, 0, 0, 3},<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{4, 0, 0, 8, 0, 3, 0, 0, 1},<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{7, 0, 0, 0, 2, 0, 0, 0, 6},<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0, 6, 0, 0, 0, 0, 2, 8, 0},<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0, 0, 0, 4, 1, 9, 0, 0, 5},<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0, 0, 0, 0, 8, 0, 0, 7, 9}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;};<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;if (solveSudoku(board) == false) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << "Nu există soluție pentru acest Sudoku.";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i < N; ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int j = 0; j < N; ++j) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << board[i][j] << " ";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << endl;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                    }
+                </code>
+              </td>
+            </tr>
+            <tr>
+                <td>Generarea permutărilor</td>
+                <td>  <code>
+                    #include &lt;iostream&gt;<br>
+                    #include &lt;vector&gt;<br>
+                    using namespace std;<br>
+                    <br>
+                    void generatePermutations(vector<int>& nums, vector<vector<int>>& result, int start) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;if (start == nums.size() - 1) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.push_back(nums);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = start; i < nums.size(); ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swap(nums[start], nums[i]);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;generatePermutations(nums, result, start + 1);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swap(nums[start], nums[i]);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    }<br>
+                    <br>
+                    int main() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;vector<int> nums = {1, 2, 3}; // Schimbă numerele pentru permutări diferite<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;vector<vector<int>> result;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;generatePermutations(nums, result, 0);<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (const auto& permutation : result) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (const auto& num : permutation) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << num << " ";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << endl;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                    }
+                </code>
+            </td>
+            </tr>
+            <tr>
+                <td>Problema reginei</td>
+                <td><code>
+                    #include &lt;iostream&gt;<br>
+                    #include &lt;vector&gt;<br>
+                    using namespace std;<br>
+                    <br>
+                    bool isSafe(vector<vector<int>>& board, int row, int col, int N) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i < col; ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (board[row][i]) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int i = row, j = col; i >= 0 && j >= 0; --i, --j) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (board[i][j]) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int i = row, j = col; i < N && j >= 0; ++i, --j) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (board[i][j]) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return true;<br>
+                    }<br>
+                    <br>
+                    bool solveNQueens(vector<vector<int>> &board, int col, int N) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;if (col >= N) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i < N; ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (isSafe(board, i, col, N)) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;board[i][col] = 1;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (solveNQueens(board, col + 1, N)) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;board[i][col] = 0;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+                    }<br>
+                    <br>
+                    int main() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int N = 4; // Numărul de regine<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;vector<vector<int>> board(N, vector<int>(N, 0)); // Tabla de 4x4 inițializată cu 0<br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;if (solveNQueens(board, 0, N) == false) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << "Nu există soluție pentru " << N << " regine.";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i < N; ++i) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int j = 0; j < N; ++j) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << board[i][j] << " ";<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << endl;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                    }
+                </code>
+            </td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>
